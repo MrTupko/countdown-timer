@@ -1,0 +1,265 @@
+/* Basic CSS Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    font-family: sans-serif;
+    line-height: 1.5;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+/* VARIABLES */
+
+:root {
+    /* Primary */
+    --grayish-blue: hsl(237, 18%, 59%);
+    --soft-red: hsl(345, 95%, 68%);
+    --soft-red-transparent: hsla(343, 24%, 15%, 0.274);
+
+    /* Neutral */
+    --white: hsl(0, 0%, 100%);
+    --dark-desaturated-blue: hsl(236, 21%, 26%);
+    --very-dark-blue: hsl(235, 16%, 14%);
+    --very-dark-mostly-black-blue: hsl(234, 17%, 12%);
+
+    --fs-400: clamp(0.5rem, 0.9vw, 1rem);
+
+}
+
+/* Fonts */
+.red-hat-text {
+    font-family: "Red Hat Text", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* General styles */
+
+body {
+    font-size: var(--fs-400);
+    color: var(--grayish-blue);
+    background-color: var(--very-dark-blue);
+    background-image: url("/images/bg-stars.svg"), linear-gradient(to bottom, var(--very-dark-blue) 60%, var(--soft-red-transparent));
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Style items */
+
+.countdown__title {
+    color: var(--white);
+    text-align: center;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    margin-block: 8rem;
+}
+
+.countdown__timer {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.countdown__time-card {
+    --dimensions: min(20vw, 160px);
+    --circle-radius: calc(var(--dimensions) * 0.15);
+    --border-radius: 10px;
+    color: var(--soft-red);
+    font-size: calc(var(--dimensions) * 0.5);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 15px 3px 1px var(--very-dark-mostly-black-blue);
+    border-radius: var(--border-radius);
+}
+
+.countdown__time {
+    position: relative;
+    display: grid;
+    gap: 2rem;
+    width: var(--dimensions);
+    height: fit-content;
+}
+
+.countdown__time-card::after,
+.countdown__time-card::before {
+    position: absolute;
+    display: block;
+    content: "";
+    width: var(--circle-radius);
+    height: var(--circle-radius);
+    top: calc(50% - (var(--circle-radius) / 2));
+    background-color: #111010d8;
+    border-radius: 50%;
+    box-shadow: 0px 0px 2px 1px #00000093;
+}
+
+.countdown__time-card::after {
+    left: calc(-1 * (var(--circle-radius) / 2));
+}
+
+.countdown__time-card::before {
+    right: calc(-1 * (var(--circle-radius) / 2));
+    z-index: 1;
+}
+
+
+
+.timer__top,
+.timer__bottom {
+    position: relative;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    background-color: var(--dark-desaturated-blue);
+    width: min(20vw, 160px);
+    height: 80px;
+}
+
+.timer__bottom {
+    background-image: linear-gradient(to top, var(--dark-desaturated-blue) 95%, #ffffff0e);
+    box-shadow: 0 0px 100px 5px var(--very-dark-mostly-black-blue);
+}
+
+.timer__number-top,
+.timer__number-bottom {
+    position: relative;
+    left: 0;
+    width: 100%;
+    line-height: 1;
+}
+
+.timer__number-top {
+    top: 20%;
+}
+
+.timer__number-bottom {
+    top: -80%;
+}
+
+.countdown__time-label {
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+}
+
+.page-footer {
+    background-image: url("/images/pattern-hills.svg");
+    background-size: cover;
+    padding: 6rem;
+    margin-top: 11rem;
+}
+
+.socials {
+    display: flex;
+    justify-content: center;
+    gap: 2.3rem;
+}
+
+.socials__link-icon {
+    fill: #8385A9;
+    transition-property: fill;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+}
+
+.socials__link:is(:hover, :active) .socials__link-icon {
+    fill: var(--soft-red);
+}
+
+/* flip animation */
+.timer__top {
+    transform-origin: bottom;
+    animation-duration: 0.5s;
+}
+
+.timer__bottom {
+    transform-origin: top;
+    animation-duration: 0.1s;
+}
+
+.countdown__time-card {
+    animation-delay: 0.05s;
+    animation-duration: 0.2s;
+}
+
+@keyframes flip {
+    0% {}
+    50% {
+        transform: rotateX(-90deg);
+    }
+    100% {
+        transform: rotateX(0deg);
+    }
+}
+
+@keyframes rotate {
+    0% {}
+
+    10% {
+        transform: rotateX(360deg);
+    }
+}
+
+/*For small screen devices and medium one's too */
+@media screen and (width <=768px) {
+    .countdown__timer {
+        justify-content: center;
+        gap: 3vw;
+    }
+
+    .countdown__time-card {
+        --dimensions: min(20vw, 160px);
+        --circle-radius: calc(var(--dimensions) * 0.12);
+        --border-radius: 5px;
+        width: fit-content;
+        box-shadow: 0 8px 2px 1px var(--very-dark-mostly-black-blue);
+    }
+
+    .countdown__time {
+        width: fit-content;
+        gap: 1.3rem;
+    }
+
+    .countdown__time>* {
+        margin-inline: auto;
+    }
+
+    .timer__top,
+    .timer__bottom {
+        width: var(--dimensions);
+        height: calc(var(--dimensions) / 2);
+    }
+}
