@@ -70,7 +70,7 @@ body {
     font-size: var(--fs-400);
     color: var(--grayish-blue);
     background-color: var(--very-dark-blue);
-    background-image: url("countdown-timer/images/bg-stars.svg"), linear-gradient(to bottom, var(--very-dark-blue) 60%, var(--soft-red-transparent));
+    background-image: url("../images/bg-stars.svg"), linear-gradient(to bottom, var(--very-dark-blue) 60%, var(--soft-red-transparent));
     background-repeat: no-repeat;
     min-height: 100vh;
     display: flex;
@@ -176,7 +176,7 @@ body {
 }
 
 .page-footer {
-    background-image: url("countdown-timer/images/pattern-hills.svg");
+    background-image: url("../images/pattern-hills.svg");
     background-size: cover;
     padding: 6rem;
     margin-top: 11rem;
